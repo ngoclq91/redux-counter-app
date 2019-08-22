@@ -1,7 +1,10 @@
 # Counter app using Redux
---
+
+---
 
 [TOC]
+
+---
 
 ## 1. プロジェクト作成
 ```bash
@@ -96,4 +99,19 @@
     // unregister() to register() below. Note this comes with some pitfalls.
     // Learn more about service workers: https://bit.ly/CRA-PWA
     serviceWorker.unregister();
+```
+
+## 3. フォルダ分離して、作業する
+```bash
+    ...
+    src
+        actions
+            index.js
+        reducers
+            counter.js
+            isLogged.js
+            index.js
+        index.js
+        ...
+    ...
 ```
