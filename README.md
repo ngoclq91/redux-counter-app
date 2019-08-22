@@ -115,3 +115,65 @@
         ...
     ...
 ```
+
+### 4. Reducer作成
+- 各レデューサーを作成する
+    - File `src/reducers/counter.js`にカウント用の処理を記入
+    ```javascript
+      /**
+       * カウンターレデューサー
+       * @param state
+       * @param action
+       * @returns {number}
+       */
+      const counterReducer = (state = 0, action) => {
+          switch (action.type) {
+              case "INCREMENT" :
+                  return state + 1;
+              case "DECREMENT" :
+                  return state - 1;
+              default:
+                  return state;
+          }
+      };
+      
+      export default counterReducer;
+    ```
+    
+    - File `src/reducers/isLogged`にログイン状態を記入
+    ```javascript
+      /**
+       * ログイン状態のレデューサー
+       * @param state
+       * @param action
+       * @returns {boolean}
+       */
+      const loggedReducer = (state = false, action) => {
+          switch (action.type) {
+              case 'SIGN_IN' :
+                  return !state;
+              default:
+                  return state;
+          }
+      };
+      
+      export default loggedReducer;
+    ```
+
+- File `src/reducers/index.js`に複数レデューサーを結合
+```javascript
+    import {counterReducer} from './counter';
+    import {loggedReducer} from './isLogged';
+    import {combineReducers} from 'redux';
+    
+    /**
+     * 複数レデューサーを1つに結合する。
+     * @type {Reducer<any>}
+     */
+    const allReducers = combineReducers({
+        counter: counterReducer,
+        isLogged: loggedReducer
+    });
+    
+    export default allReducers;
+```
