@@ -4,6 +4,19 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+
+// 1. STORE : Globalized state
+
+
+// 2. ACTION: Increment (counter)
+
+
+// 3. REDUCER : tiếp nhận action và trả về state mới bởi action đó
+
+
+// 4. DISPATCH
+
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
