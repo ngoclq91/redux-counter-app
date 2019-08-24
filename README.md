@@ -12,7 +12,7 @@
    > $ npm install redux react-redux
 ```
 
-## 2. 基本的なステップ
+## 2. 基本的なステップ (機能によるフォルダ分割せずにする場合)
 - File `src/index.js`に下記のような4ステップを記入
 ```javascript
     import React from 'react';
@@ -162,18 +162,18 @@
 
 - File `src/reducers/index.js`に複数レデューサーを結合
 ```javascript
-    import {counterReducer} from './counter';
-    import {loggedReducer} from './isLogged';
+    import counterReducer from './counter';
+    import loggedReducer from './isLogged';
     import {combineReducers} from 'redux';
     
     /**
      * 複数レデューサーを1つに結合する。
      * @type {Reducer<any>}
      */
-    const allReducers = combineReducers({
+    const allReducer = combineReducers({
         counter: counterReducer,
         isLogged: loggedReducer
     });
     
-    export default allReducers;
+    export default allReducer;
 ```
