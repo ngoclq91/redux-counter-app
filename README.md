@@ -233,3 +233,73 @@
     serviceWorker.unregister();
 ```
 - Như vậy, chúng ta đã giúp cho tất cả các component con truy xuát được Redux store.
+
+### 7. Get value state from Redux
+- Ở phần này ta sẽ tìm hiểu các việc sau:
+    - Get giá trị state của Redux : sử dụng `useSelector`
+    - Tạo giao diện
+    - Tạo action cho 2 button increment và decrement
+    - Kết nối action: sử dụng `useDispatch`
+    - Thêm tính năng chỉ định cộng or trừ bao nhiêu bằng cách truyền tham số.
+
+1. Tạo action:
+    - Tại file `Actions/index.js`:
+    ```javascript
+       /**
+        * Action Increment
+        *
+        * @param step : cộng bao nhiêu đơn vị
+        * @returns {{payload: number, type: string}}
+        */
+       export const increment = (step = 1) => {
+           return {
+               type: 'INCREMENT',
+               payload: step
+           };
+       };
+       
+       /**
+        * Action Decrement
+        *
+        * @param step trừ bao nhiêu đơn vị
+        * @returns {{payload: *, type: string}}
+        */
+       export const decrement = (step) => {
+           return {
+               type : 'DECREMENT',
+               payload: step
+           };
+       };
+    ```
+
+2. Get state value của Redux, tạo giao diện, kết nối action:
+    - `useSelector`の`react-redux`を使用して、State値のReduxを取得できる。
+    - File `src/App.js`に以下のように書いてcounter値を取得できるようにする
+    ```javascript
+       import React from 'react';
+       import { useSelector, useDispatch } from 'react-redux';
+       import {increment, decrement} from './actions';
+       
+       function App() {
+       
+           /** カウンター値 */
+           const counter = useSelector( state => state.counter );
+       
+           /** ログしたかどうか */
+           const isLogged = useSelector( state => state.isLogged);
+       
+           /** khai báo sử dụng dispatch để gọi action */
+           const dispatch = useDispatch();
+       
+           return (
+               <div className="App">
+                   <h1>Counter {counter}</h1>
+                   <button onClick={ () => dispatch(increment(5))}>+</button>
+                   <button onClick={ () => dispatch(decrement(5))}>-</button>
+                   { isLogged ? <h3>Valuable Information I shouldn't see</h3> : ''}
+               </div>
+         );
+       }
+       
+       export default App;
+    ```
