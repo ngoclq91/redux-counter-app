@@ -94,10 +94,6 @@
     store.dispatch(increment());
     
     ReactDOM.render(<App />, document.getElementById('root'));
-    
-    // If you want your app to work offline and load faster, you can change
-    // unregister() to register() below. Note this comes with some pitfalls.
-    // Learn more about service workers: https://bit.ly/CRA-PWA
     serviceWorker.unregister();
 ```
 
@@ -201,6 +197,8 @@
     serviceWorker.unregister();
 ```
 
+- Install & doc [redux devtools](https://github.com/MarshallOfSound/electron-devtools-installer)
+
 ### 6. Storeをアプリに接続する
 - Bước này chúng ta cần làm là gói tất cả các component lại với component `Provider`.
 - Component `Provider` được cung cấp bởi `react-redux`
@@ -272,7 +270,30 @@
        };
     ```
 
-2. Get state value của Redux, tạo giao diện, kết nối action:
+2. Update reducer counter để nhận giá trị step:
+- Tại file `reducers/counter.js`:
+```javascript
+    /**
+     * カウンターレデューサー
+     * @param state
+     * @param action
+     * @returns {number}
+     */
+    const counterReducer = (state = 0, action) => {
+        switch (action.type) {
+            case "INCREMENT" :
+                return state + action.payload;
+            case "DECREMENT" :
+                return state - action.payload;
+            default:
+                return state;
+        }
+    };
+    
+    export default counterReducer;
+```
+
+3. Get state value của Redux, tạo giao diện, kết nối action:
     - `useSelector`の`react-redux`を使用して、State値のReduxを取得できる。
     - File `src/App.js`に以下のように書いてcounter値を取得できるようにする
     ```javascript
