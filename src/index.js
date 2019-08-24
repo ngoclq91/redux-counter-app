@@ -3,6 +3,20 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {createStore} from 'redux';
+import allReducer from './reducers';
+
+/**
+ * store作成
+ *
+ * @type {any}
+ */
+const store = createStore(
+    allReducer, // preloadedState
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // redux開発ツール
+);
+
+store.subscribe( () => console.log(store.getState()));
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
