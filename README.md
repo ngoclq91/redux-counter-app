@@ -200,3 +200,36 @@
     ReactDOM.render(<App />, document.getElementById('root'));
     serviceWorker.unregister();
 ```
+
+### 6. Storeをアプリに接続する
+- Bước này chúng ta cần làm là gói tất cả các component lại với component `Provider`.
+- Component `Provider` được cung cấp bởi `react-redux`
+- Nó giúp chúng ta có thể truy cập store cũng như tất cả những func của nó ở tất cả các component con.
+- Điều duy nhất chúng ta phải làm là cài đặt store và gói tất cả các component con vào component `Provider`.
+- Sau đó store sẽ được truyền vào `Provider` như là 1 property.
+- Lúc này, file `src/index.js` sẽ viết như sau:
+```javascript
+    ...
+    import {createStore} from 'redux';
+    import allReducer from './reducers';
+    import {Provider} from 'react-redux';
+    
+    /**
+     * store作成
+     *
+     * @type {any}
+     */
+    const store = createStore(
+        allReducer, // preloadedState
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    // redux開発ツール
+    );
+    
+    ReactDOM.render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+        document.getElementById('root')
+    );
+    serviceWorker.unregister();
+```
+- Như vậy, chúng ta đã giúp cho tất cả các component con truy xuát được Redux store.
